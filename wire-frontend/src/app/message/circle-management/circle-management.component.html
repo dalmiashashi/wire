@@ -2,15 +2,14 @@
 <div *ngIf="typeOfForm === 'createCircle' then createCircleBlock"></div>
 <ng-template #createCircleBlock>
 <div class="main-login main-center">
-	<h5>Create Circle</h5>
-		<form class="" method="post" action="#">
+	<!-- <h5>Create Circle</h5> -->
+		<form class="needs-validation" [formGroup]="createUserForm" (ngSubmit)="onSubmitCreateUser(createUserForm.value)">
 			
 			<div class="form-group">
 				<label for="name" class="cols-sm-2 control-label">Circle Name</label>
 				<div class="cols-sm-10">
 					<div class="input-group">
-						<!-- <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span> -->
-						<input type="text" class="form-control" name="name" id="name"  placeholder="Enter circle Name"/>
+						<input type="text" class="form-control" placeholder="Enter circle Name" value="" name="circleName" formControlName="field_circleName">
 					</div>
 				</div>
 			</div>
@@ -20,24 +19,50 @@
 				<div class="cols-sm-10">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-						<input type="text" class="form-control" name="email" id="email"  placeholder="Circle Purpose"/>
+						<input type="text" class="form-control" placeholder="Circle Purpose" value="" name="circlePurpose" formControlName="field_circlePurpose">
 					</div>
 				</div>
 			</div>
+
+
+
 
 			<div class="form-group">
 				<label for="username" class="cols-sm-2 control-label">Add Users to Circle</label>
 				<div class="cols-sm-10">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-						<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+						<input type="text" class="form-control"  [(ngModel)]="listOfUsers_val" placeholder="" readonly value="" name="listOfUsers" formControlName="field_listOfUsers">
 					</div>
 				</div>
 			</div>
+			
+			<div class="form-group">
+				<!-- <label for="username" class="cols-sm-2 control-label">Search Users</label> -->
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="text" class="form-control rounded" placeholder="Type User First Name and Last Name"/>
+							<div class="input-group-append">
+							  <button class="btn btn-outline-secondary" type="button" (click)="onClickUserSearchButton()">
+							   <span class="octicon search"></span> search</button>
+							</div>
+					</div>
 
+						<br>					
+						<ul class="list-group" *ngFor="let user of users">
+							  <li class="list-group-item d-flex justify-content-between align-items-center">
+							    {{user.name}}
+							    <button class="badge badge-primary badge-pill" name="selectbutton" (click)="onClickselectUser(user.username)">add</button>
+							  </li>
+						</ul>
+					
+					
+				</div>
+			</div>
+	
 			<div class="form-group d-flex align-items-center">
-				<a href="#" target="_blank" type="button" id="button" class="btn btn-primary btn-lg login-button">Confirm</a>
-				<a href="#" target="_blank" type="button" id="button" class="btn btn-primary btn-lg login-button">Cancel</a>
+				<input type="submit" class="btn btn-primary btn-lg"  value="Confirm">
+				<input type="submit" class="btn btn-warning btn-lg"  [disabled]="createUserForm.valid"  value="Cancle">
 			</div>
 			
 		</form>

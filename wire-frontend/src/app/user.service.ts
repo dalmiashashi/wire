@@ -1,3 +1,4 @@
+import { iUser } from "./message/user/iuser";
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
@@ -63,4 +64,33 @@ export class UserService {
 
       })
   }
+  
+  getUserListRemoveMe() {
+    
+      let users : iUser[];
+    
+      let thisLogin_user = sessionStorage.getItem('login_user');
+      
+        this.getUsers().subscribe((users) => {
+        console.log("UUUU===> " + users);
+        users = users;
+        
+        //remove loggin in user from the user list
+        let loopCount = 0;
+        for (let _user of users) {
+          console.log(_user.username);
+          
+          if(_user.username === thisLogin_user) {
+              users.splice(loopCount,1);
+          }
+          
+          loopCount++;
+        }
+              
+      })
+    
+    return users;
+    
+  }
+  
 }
