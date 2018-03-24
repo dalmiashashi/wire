@@ -1,0 +1,50 @@
+
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+	<div class="sidebar-sticky">
+		<div class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+			<h4 class="font-weight-bold">CIRCLE</h4> 
+			<button class="btn btn-sm btn-outline-primary" (click)="open(content)">+</button>						
+		</div>
+		
+		<ul class="nav flex-column">
+		    <li class="nav-item p-0 nav-link" 
+		    		*ngFor="let userCircle of userCircles" (click)="selectCircle(userCircle)"> 
+    				{{userCircle}}
+    			</li>
+  		</ul>
+	</div>
+</nav>
+
+			
+
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title">Add Circle</h4>
+		<button type="button" class="close" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<form>
+		  <div class="form-group">
+		    <label for="ciecleName" class="col-form-label">Circle Name</label>
+		    <input type="text" class="form-control" id="circleName">
+		  </div>
+		  <div class="form-group">
+		    <label for="purpose" class="col-form-label">Purpose</label>
+		    <textarea class="form-control" id="purpose"></textarea>
+		  </div>
+		  <hr>
+		  <div class="form-group">
+		    <label for="members" class="col-form-label">Members</label>
+		    <input type="text" class="form-control" id="members">
+		  </div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary">Send message</button>
+	</div>
+</ng-template>
+ 
+			

@@ -1,0 +1,57 @@
+<!-- <div *ngIf="!userLoggedIn; else formInfo"> -->
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+	<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Activity
+		Stream <br />
+		<h6 class="h4-heading"></h6>
+	</a>
+	<!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
+	<ul class="navbar-nav px-3">
+		<li class="nav-item text-nowrap"><a class="nav-link" href="#">Sign
+				out</a></li>
+	</ul>
+</nav>
+
+<body class="text-center">
+	<form class="form-signin" [formGroup]="userForm"
+		(ngSubmit)="onSubmit(userForm.value)">
+	
+		<div class="form-container">
+			<div class="row column">
+	
+	
+				<h1>Please sign in</h1>
+	
+				<label for="userName" class="sr-only">User Id</label> 
+				<input type="text" id="userName" name="userName" class="form-control"
+					placeholder="User Id" required autofocus  formControlName="userName"
+					(focus)="onFocus($event)" >
+				
+				<label for="inputPassword" class="sr-only">Password</label> 
+				<input type="password" id="inputPassword" name="password"
+					class="form-control" placeholder="Password"
+					formControlName="password"
+					(focus)="onFocus($event)" >
+					 
+				<input type="submit"
+					class="btn btn-lg btn-primary btn-block"
+					[disabled]="!userForm.valid" value="submit">
+					
+			</div>
+		</div>
+				<a href="#" class="badge badge-danger">Forgot Password?</a>
+				<a href="/register" class="badge badge-success">New User? Register</a>
+
+					<hr width=100% align=left>
+					<div *ngIf="edited" class="alert alert-danger box-msg" role="alert">
+	
+					        <strong>Error:</strong> User Id or Password is not correct.
+					</div>					
+	</form>
+</body>
+
+
+<!-- </div>
+
+<ng-template #formInfo>
+<h1>Hello!!!</h1>
+</ng-template> -->

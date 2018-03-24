@@ -1,0 +1,139 @@
+
+
+
+	<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">WIRE</a> 
+		<span class="welcome_user text-center">Welcome {{login_user}}</span>
+		<ul class="navbar-nav px-3">
+			<li class="nav-item text-nowrap">
+				<a class="nav-link" href="#">Sign out</a>
+			</li>
+		</ul>
+	</nav>
+	
+	<div class="container-fluid">
+		<div class="row">
+
+			<app-circle (selectedCircle)="onSelect($event)"></app-circle>
+
+
+			<app-user (selectedUser)="onSelect($event)"></app-user>
+
+ 			<div class="row col-md-9 offset-md-2">
+			<div class="col-11 main-body">
+			
+				<!-- Header -->
+				<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+					<h1 class="h2">{{messageDisplayFor}}</h1>
+					<div class="btn-toolbar mb-2 mb-md-0">
+					
+					<div *ngIf="messageType === 'circle'; then circleBlock"></div>
+						<ng-template #circleBlock>
+							<div class="btn-group mr-2">
+								<button class="btn btn-sm btn-outline-secondary" (click)="buttonClicked('addcircle')">Add New Circle</button>
+								<button class="btn btn-sm btn-outline-secondary">Add Someone to Circle</button>
+								<button class="btn btn-sm btn-outline-secondary">Circle Details</button>
+								<button class="btn btn-sm btn-outline-secondary">Leave Circle</button>
+							</div>
+						</ng-template>
+						<div *ngIf="messageType === 'user'; then userBlock"></div>
+						<ng-template #userBlock>
+							<div class="btn-group mr-2">
+								<button class="btn btn-sm btn-outline-secondary">User Details</button>
+							</div>
+						</ng-template>
+					</div>
+				</div>
+				
+	<!-- ================================================================================================================= -->
+				<div>
+					<div *ngIf="operation === '' then messageBlock  else formBlock"></div>
+						<ng-template #messageBlock>
+			<!-- ======= Message Block  ======= -->
+	 					<div *ngFor="let thisMessage of messages">
+					
+						<div *ngIf="thisMessage.senderName === login_user; then thenBlock  else elseBlock"></div>
+						<ng-template #thenBlock>
+						<div class=" row pr-4 justify-content-end ">
+							<div class="card card-me col-6">
+									<div class="card-title">
+										<span class="font-weight-bold"> Me </span>
+										<span class="small messageDate"> {{formatDate(thisMessage.postedDate)}}</span>
+									</div>
+								<div class="card-body  pt-1">
+								<p class="card-text">{{thisMessage.message}}</p>
+								</div>
+							</div>
+						</div>
+						</ng-template>
+						<br />
+						<ng-template #elseBlock >
+							<div class="card col-6">
+								<div class="card-body  pt-1">
+									<div class="card-title">
+										<span class="font-weight-bold"> {{thisMessage.senderName}} </span>
+										<span class="small messageDate"> {{formatDate(thisMessage.postedDate)}}</span>
+									</div>
+									<p class="card-text">{{thisMessage.message}}</p>
+								</div>
+							</div>
+						</ng-template>
+						
+					
+					</div>
+
+
+
+					</ng-template> <!-- xxxxxxxxxx Message Block END  xxxxxxxxxx -->
+	 				<ng-template #formBlock>
+			<!-- ======= Form Block  ======= -->
+	
+	
+						<app-circle-management [typeOfForm]="operation"></app-circle-management>
+	
+
+	
+	 				</ng-template>
+ 				
+ 				
+ 				
+ 				</div>
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+ 				
+			</div>
+			</div>
+
+						 <div class="row col-md-9 offset-md-2">
+						<div class="col-11">
+						
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <button class="btn btn-outline-secondary" (click)="onClick(message, type)" type="button">Post</button>
+							  </div>
+							  <input type="text" class="form-control" placeholder="Message" aria-label="" aria-describedby="basic-addon1" [(ngModel)]='message'>
+							</div>			
+						
+						
+			<!-- 				<button (click)="onClick(message, type)">Post </button> 
+							<input type="text" class="form-control" placeholder="Message" [(ngModel)]='message'> -->
+						</div>
+						</div>
+
+		</div>
+		
+		
+		
+	</div>
+
